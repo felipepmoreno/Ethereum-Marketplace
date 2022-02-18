@@ -16,6 +16,14 @@ contract Marketplace {
         bool purchased;
     }
 
+    event ProductCreated(
+        uint id, 
+        string name,
+        uint price,
+        address owner,
+        bool purchased
+    );
+
     constructor() public{
         name = "Marketplace";
     }
@@ -23,5 +31,6 @@ contract Marketplace {
     function CreateProduct(string memory _name, uint _price) public{
         productCount++;
         products[productCount] = Product(productCount, _name, _price, msg.sender, false);
+        emit ProductCreated(productCount, _name, _price, msg.sender, false);
     }
 }
